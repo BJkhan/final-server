@@ -6,6 +6,7 @@ const subsUser = mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      default: "email@example.com"
     },
   },
   {

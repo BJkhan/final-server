@@ -14,16 +14,16 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 
 dotenv.config();
-// connectDatabase();
-async function connectDB(){
-  try {
-  const connection = await mongoose.connect('mongodb://127.0.0.1:27017/clothesshop', {
-  });
-  console.log("Connected to db");
-  } catch (error) {
-  console.error("Error not connected", error.message);
-  }
-  }
+connectDatabase();
+// async function connectDB(){
+//   try {
+//   const connection = await mongoose.connect('mongodb://127.0.0.1:27017/clothesshop', {
+//   });
+//   console.log("Connected to db");
+//   } catch (error) {
+//   console.error("Error not connected", error.message);
+//   }
+//   }
   
 const app = express();
 app.use(express.json());
@@ -44,7 +44,7 @@ app.get("/api/config/paypal", (req, res) => {
 // ERROR HANDLER
 app.use(notFound);
 app.use(errorHandler);
-connectDB();
+// connectDB();
 const PORT = process.env.PORT || 1000;
 
 app.listen(PORT, console.log(`server run in port ${PORT}`));

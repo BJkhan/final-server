@@ -40,10 +40,6 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    currency:{
-      type: String,
-      required: true,
-    },
     isAdmin: {
       type: Boolean,
       required: true,

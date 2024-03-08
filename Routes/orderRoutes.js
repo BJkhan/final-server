@@ -111,30 +111,33 @@ orderRouter.get(
 
 // Plutu.ly Sadad API endpoint for payment initiation
 orderRouter.post('/initiate-payment', async (req, res) => {
-    const { Category, Amount, Msisdn, BirthYear, InvoiceNo } = req.body;
-    const API_KEY = process.env.API_KEY;
-    const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
-    const url = 'https://api.plutus.ly/api/v1/transaction/sadadapi/verify';
-    const headers = {
-      'X-API-KEY': API_KEY,
-      'Authorization': `Bearer ${ACCESS_TOKEN}`,
-      'Content-Type': 'multipart/form-data'
-    };
-    const formData = new FormData();
-    formData.append('InvoiceNo', InvoiceNo);
-    formData.append('Category', Category);
-    formData.append('mobile_number', Msisdn);
-    formData.append('amount', Amount);
-    formData.append('birth_year', BirthYear);
-   
-    axios.post(url, formData, { headers })
-    .then(response => {
-      res.send(response.data)
-    })
-    .catch(error => {
-      console.error('Error:', error.response ? error.response.data : error.message)
-    });
+  const { Category, Amount, Msisdn, BirthYear, InvoiceNo } = req.body;
+  const API_KEY = process.env.API_KEY;
+  const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+  const url = 'https://api.plutus.ly/api/v1/transaction/sadadapi/verify';
+  const headers = {
+    'X-API-KEY': API_KEY,
+    'Authorization': `Bearer ${ACCESS_TOKEN}`,
+    'Content-Type': 'application/json' // Change content type to JSON
+  };
+  
+  const requestData = {
+    InvoiceNo,
+    Category,
+    mobile_number: Msisdn,
+    amount: Amount,
+    birth_year: BirthYear
+  };
+ 
+  axios.post(url, requestData, { headers })
+  .then(response => {
+    res.send(response.data)
+  })
+  .catch(error => {
+    console.error('Error:', error.response ? error.response.data : error.message)
+  });
 });
+
 
 // plutu confirm payment
 orderRouter.post('/pay-invoice', async (req, res) => {

@@ -15,7 +15,7 @@ const priceModel = mongoose.Schema(
         tax: {
             type: Number,
             required: true,
-            default: true,
+            default: 0,
           },
     }
 );

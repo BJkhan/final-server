@@ -5,6 +5,7 @@ const paymentModel = mongoose.Schema(
         name: {
             type: String,
             required: true,
+            default: "PayPal"
           },
         isActive: {
             type: Boolean,

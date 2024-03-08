@@ -118,6 +118,11 @@ userRouter.put(
     const user = await User.findById(req.user._id);
 
     if (user) {
+      user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        if (req.body.password) {
+          user.password = req.body.password;
+        }
       user.addressFirst = req.body.addressFirst || user.addressFirst;
       user.addressSecond = req.body.addressSecond || user.addressSecond;
       user.province = req.body.province || user.province;
